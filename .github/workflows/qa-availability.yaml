@@ -21,10 +21,6 @@ jobs:
         gh --version
         gh auth login<<EOF
           GitHub.com
-          HTTPS
-          Yes
-          "Paste an authentication token"
-          ${{ secrets.GH_AUTH_TOKEN }}
         EOF
         echo "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
         gh pr list
