@@ -1,0 +1,27 @@
+name: common-qa-availability-workflow
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  build-push-gcr:
+    runs-on: [ubuntu-latest]
+    steps:
+
+    - name: Checkout on Push
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: 'Set up gh util'
+      env: 
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |-
+        sudo apt update && sudo apt upgrade
+        sudo apt install gh
+        gh --version
+        gh pr list
+        echo "111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+        git branch
+        echo "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
