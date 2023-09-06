@@ -3,33 +3,6 @@ name: common-qa-availability-workflow
 on:
   workflow_dispatch:
   push:
-  # pull_request:
-  #   paths:
-  #     - 'api/**'
-  #     - 'assessment/**'
-  #     - 'data-processing/**'
-  #     - 'framework/**'
-  #     - 'messaging/**'
-  #     - 'storage/**'
-  #     - 'user-auth-permission/**'
-  #     - 'visualization/**'
-  #     - 'workers/assessment-due/**'
-  #     - 'workers/metric-aggregate/**'
-  #     - 'workers/metric-calculate/**'
-  #   types: [opened, reopened, edited, synchronize, auto_merge_disabled]
-
-permissions:
-  actions: write
-  checks: write
-  contents: write
-  deployments: write
-  issues: write
-  packages: write
-  pull-requests: write
-  repository-projects: write
-  security-events: write
-  statuses: write
-  id-token: write
 
 jobs:
   build-push-gcr:
@@ -42,7 +15,18 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: 'Set up Cloud SDK'
+    - name: 'Set up gh util'
       run: |-
         sudo apt update && sudo apt upgrade
         sudo apt install gh
+        gh --version
+        gh auth login<<EOF
+          GitHub.com
+          HTTPS
+          Yes
+          Paste an authentication token
+          ${{ secrets.GH_AUTH_TOKEN }}
+        EOF
+        echo "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        gh pr list
+        echo "111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
