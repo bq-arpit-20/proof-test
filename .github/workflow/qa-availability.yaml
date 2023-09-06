@@ -1,0 +1,47 @@
+name: common-qa-availability-workflow
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'api/**'
+      - 'assessment/**'
+      - 'data-processing/**'
+      - 'framework/**'
+      - 'messaging/**'
+      - 'storage/**'
+      - 'user-auth-permission/**'
+      - 'visualization/**'
+      - 'workers/assessment-due/**'
+      - 'workers/metric-aggregate/**'
+      - 'workers/metric-calculate/**'
+    types: [opened, reopened, edited, synchronize, auto_merge_disabled]
+
+permissions:
+  actions: write
+  checks: write
+  contents: write
+  deployments: write
+  issues: write
+  packages: write
+  pull-requests: write
+  repository-projects: write
+  security-events: write
+  statuses: write
+  id-token: write
+
+jobs:
+  build-push-gcr:
+    runs-on: [ubuntu-latest]
+    steps:
+
+    - name: Checkout on Push
+      if: ${{ startsWith(github.ref, 'refs/heads/') }}
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: 'Set up Cloud SDK'
+      run: |-
+        sudo apt update && sudo apt upgrade
+        sudo apt install gh
