@@ -24,11 +24,9 @@ jobs:
           GitHub.com
           HTTPS
           Yes
-          Paste an authentication token
+          "Paste an authentication token"
           ${{ secrets.GH_AUTH_TOKEN }}
         EOF
         echo "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
         gh pr list
         echo "111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
-
-        
