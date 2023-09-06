@@ -10,7 +10,6 @@ jobs:
     steps:
 
     - name: Checkout on Push
-      if: ${{ startsWith(github.ref, 'refs/heads/') }}
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
